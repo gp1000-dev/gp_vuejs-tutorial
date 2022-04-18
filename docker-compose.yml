@@ -1,0 +1,14 @@
+version: '3.8' # おまじない（Composeファイル形式の宣言）
+services: # サービス
+  web: # サービスの名称(任意の文字列) 
+    container_name: web # コンテナの名称(任意の文字列)
+    build: ./docker/web # Dockerfileのあるディレクトリのパスを指定
+    ports: # ポートフォワードの指定（ホスト側ポート：コンテナ側ポート）
+      - 8080:8080
+    privileged: true # コンテナーに拡張権限を付与する（systemctlコマンドを有効にする）
+    volumes: # ボリュームの名称(任意の文字列) とマウント先
+      - ./server:/app:cached
+    # コンテナを起動してもすぐ終了しないようにする設定
+    tty: true # 擬似TTY(端末デバイス：キーボードによる入力)をコンテナに割り当てる
+    stdin_open: true # 標準入出力とエラー出力をコンテナに結びつける
+    command: /bin/sh # 用いるdockerコマンドの指定
