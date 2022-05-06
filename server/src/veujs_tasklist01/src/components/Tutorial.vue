@@ -11,7 +11,20 @@
       </tr>
       </thead>
       <tbody>
-      <!-- [1] ここに <tr> で ToDo の要素を1行づつ繰り返し表示したい -->
+      <!-- ここに <tr> で ToDo の要素を1行づつ繰り返し表示 -->
+      <tr v-for="item in todos" v-bind:key="item.id">
+        <!-- 要素の情報 -->
+        <th>{{ item.id }}</th>
+        <td>{{ item.comment }}</td>
+        <td class="state">
+          <!-- 状態変更ボタンのモック -->
+          <button>{{ item.state }}</button>
+        </td>
+        <td class="button">
+          <!-- 削除ボタンのモック -->
+          <button>削除</button>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>
@@ -20,7 +33,11 @@
 <script>
 export default {
   name: 'Tutorial',
-  data () {}
+  data () {
+    return {
+      todos: []// ToDo リストデータ用の空の配列を data オプションへ登録
+    }
+  }
 }
 </script>
 
