@@ -60,6 +60,15 @@ export default {
       current: -1
     }
   },
+  computed: {
+    computedTodos: function () {
+      // データ current が -1 ならすべて
+      // それ以外なら current と state が一致するものだけに絞り込む
+      return this.todos.filter(function (el) {
+        return this.current < 0 ? true : this.current === el.state
+      }, this)
+    }
+  },
   created () {
     // インスタンス作成時に自動的に fetch() する
     this.todos = todoStorage.fetch()
