@@ -12,7 +12,7 @@
       </thead>
       <tbody>
       <!-- ここに <tr> で ToDo の要素を1行づつ繰り返し表示 -->
-      <tr v-for="item in todos" v-bind:key="item.id">
+      <tr v-for="item in computedTodos" v-bind:key="item.id">
         <!-- 要素の情報 -->
         <th>{{ item.id }}</th>
         <td>{{ item.comment }}</td>
