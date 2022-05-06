@@ -85,6 +85,15 @@ export default {
       })
       // フォーム要素を空にする
       comment.value = ''
+    },
+    // 状態変更の処理
+    doChangeState: function (item) {
+      item.state = item.state ? 0 : 1
+    },
+    // 削除の処理
+    doRemove: function (item) {
+      const index = this.todos.indexOf(item)
+      this.todos.splice(index, 1)
     }
   }
 }
