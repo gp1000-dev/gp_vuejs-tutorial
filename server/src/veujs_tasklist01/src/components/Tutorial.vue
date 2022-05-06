@@ -1,5 +1,10 @@
 <template>
   <div>
+    <label v-for="label in options" v-bind:key="label.value">
+      <input type="radio"
+              v-model="current"
+              v-bind:value="label.value">{{ label.label }}
+    </label>
     <table>
       <!-- テーブルヘッダー -->
       <thead>
