@@ -23,7 +23,7 @@
         <td>{{ item.comment }}</td>
         <td class="state">
           <button v-on:click="doChangeState(item)">
-            {{ item.state }}
+            {{ labels[item.state] }}
           </button>
         </td>
         <td class="button">
@@ -66,6 +66,13 @@ export default {
     }
   },
   computed: {
+    labels () {
+      return this.options.reduce(function (a, b) {
+        return Object.assign(a, { [b.value]: b.label })
+      }, {})
+      // キーから見つけやすいように、次のように加工したデータを作成
+      // {0: '作業中', 1: '完了', -1: 'すべて'}
+    },
     computedTodos: function () {
       // データ current が -1 ならすべて
       // それ以外なら current と state が一致するものだけに絞り込む
