@@ -27,6 +27,14 @@
       </tr>
       </tbody>
     </table>
+
+    <h2>新しい作業の追加</h2>
+    <form class="add-form" v-on:submit.prevent="doAdd">
+      <!-- コメント入力フォーム -->
+      コメント <input type="text" ref="comment">
+      <!-- 追加ボタンのモック -->
+      <button type="submit">追加</button>
+    </form>
   </div>
 </template>
 
@@ -35,7 +43,29 @@ export default {
   name: 'Tutorial',
   data () {
     return {
-      todos: []// ToDo リストデータ用の空の配列を data オプションへ登録
+      todos: [], // ToDo リストデータ用の空の配列を data オプションへ登録
+      uid: 0
+    }
+  },
+  methods: {
+    // ToDo 追加の処理
+    doAdd: function (event, value) {
+      // ref で名前を付けておいた要素を参照
+      var comment = this.$refs.comment
+      // 入力がなければ何もしないで return
+      if (!comment.value.length) {
+        return
+      }
+      // { 新しいID, コメント, 作業状態 }
+      // というオブジェクトを現在の todos リストへ push
+      // 作業状態「state」はデフォルト「作業中=0」で作成
+      this.todos.push({
+        id: this.uid++,
+        comment: comment.value,
+        state: 0
+      })
+      // フォーム要素を空にする
+      comment.value = ''
     }
   }
 }
