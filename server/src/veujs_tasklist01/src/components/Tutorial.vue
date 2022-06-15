@@ -62,6 +62,11 @@
 *   処理をコンポーネント化して 指定要素で実施する部分です
 */
 <script>
+
+/* [インポート] このファイルコンポーネントで外部のコンポーネントを使用可能にする */
+// todoStorageコンポーネントをインポートする
+import todoStorage from '../plugins/todoStorage'
+
 /* [エクスポート] 他のコンポーネントで使用できる様に外部参照を可能にする */
 // [export default] 処理をコンポーネント化して 指定要素で実施する
 export default {
@@ -74,6 +79,30 @@ export default {
       // ToDo リストデータ用の空の配列を data オプションへ登録
       todos: [], // 配列todos[]を定義する
       uid: 0 // 変数uidを定義する
+    }
+  },
+  // ライフサイクルフックを定義する
+  // dataオブジェクトをリアクティブにする
+  // ここでのリアクティブとは値の更新を行うと更新が反映されること
+  created () {
+    // インスタンス作成時に自動的に fetch() する
+    // [fetch()] 非同期通信でサーバ上にある欲しいデータを取得できる
+    this.todos = todoStorage.fetch()
+    // [Array.length] 配列の要素の数を取得する
+    this.uid = this.todos.length
+  },
+  // watchオプションを定義する
+  // [watch: { '監視するデータ': '呼び出す関数（ハンドラー）' }]
+  watch: {
+    todos: {
+      /* 監視するデータの変更後の値を保存するイベントハンドラー */
+      // 引数はウォッチしているプロパティの変更後の値です
+      handler: function (todos) {
+        // ウォッチしているプロパティの変更後の値をローカルストレージに保存する
+        todoStorage.save(todos)
+      },
+      // [(watchの)deepオプション] ネストしているデータも監視する
+      deep: true
     }
   },
   // メソッドオプションを定義する
