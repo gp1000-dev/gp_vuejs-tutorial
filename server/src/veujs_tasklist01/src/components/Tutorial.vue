@@ -11,6 +11,19 @@
 <template>
   <!-- ToDOListのHTMLコンポーネント -->
   <div>
+    <!-- ToDoListの絞り込みボタンのHTMLコンテンツ -->
+    <!-- リストレンダリング(反復表示) -->
+    <!-- [v-for]配列やオブジェクトの中身を反復表示させるディレクティブ -->
+    <!-- [v-bind:key] リストのアイテムを識別可能にする（keyにlabel.valueを指定） -->
+    <label v-for="label in options" v-bind:key="label.value">
+      <!-- 双方向バインディング（フォーム入力バインディング） -->
+      <!-- [v-model="変数名"] 入力時に 入力値の値を即座に変数currentに格納する -->
+      <!-- （単方向）バインディング -->
+      <!-- [v-bind:value] dataプロパティのlabel.valueの変更を{{ label.label }}に単方向で反映する（valueにlabel.valueを指定） -->
+      <input type="radio"
+              v-model="current"
+              v-bind:value="label.value">{{ label.label }}
+    </label>
     <!-- ToDoListのテーブル部分のHTMLコンテンツ -->
     <table>
       <!-- テーブルヘッダー（見出し） -->
