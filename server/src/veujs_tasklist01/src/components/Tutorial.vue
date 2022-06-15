@@ -9,7 +9,25 @@
 *   HTMLコンポーネントの作成, HTML部のルート要素の指定など、要素をアプリケーションに紐付ける部分です
 */
 <template>
-  <p>test</p>
+  <!-- ToDOListのHTMLコンポーネント -->
+  <div>
+    <!-- ToDoListのテーブル部分のHTMLコンテンツ -->
+    <table>
+      <!-- テーブルヘッダー（見出し） -->
+      <thead>
+      <tr>
+        <th class="id">ID</th>
+        <th class="comment">コメント</th>
+        <th class="state">状態</th>
+        <th class="button">-</th>
+      </tr>
+      </thead>
+      <!-- テーブルボディ -->
+      <tbody>
+      <!-- [1] ここに <tr> で ToDo の要素を1行づつ繰り返し表示したい -->
+      </tbody>
+    </table>
+  </div>
 </template>
 
 /**
