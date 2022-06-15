@@ -43,6 +43,17 @@
         </tr>
       </tbody>
     </table>
+    <!-- タスクの追加をする入力欄 -->
+    <h2>新しい作業の追加</h2>
+    <!-- イベントハンドリング -->
+    <!-- v-on:イベント名="メソッド名($event)" -->
+    <!-- [v-on:submit.prevent=""] イベントにデフォルトで設定されている処理を実行しない -->
+    <form class="add-form" v-on:submit.prevent="doAdd">
+      <!-- コメント入力フォーム -->
+      コメント <input type="text" ref="comment">
+      <!-- 追加ボタンのモック -->
+      <button type="submit">追加</button>
+    </form>
   </div>
 </template>
 
@@ -60,8 +71,31 @@ export default {
   // アプリケーションで使用するデータを定義する
   data () {
     return {
-      // ToDo リストデータ用の空の配列を data オプションへ登録する
-      todos: [] // // 配列todos[]を定義する
+      // ToDo リストデータ用の空の配列を data オプションへ登録
+      todos: [], // 配列todos[]を定義する
+      uid: 0 // 変数uidを定義する
+    }
+  },
+  // メソッドオプションを定義する
+  methods: {
+    // ToDoListの追加の処理をするメソッド
+    doAdd: function (event, value) { // メソッドを定義する
+      // ref で名前を付けておいた要素を参照する
+      var comment = this.$refs.comment // 変数commentを初期化する
+      // 入力がなければ何もしないで return
+      if (!comment.value.length) {
+        return
+      }
+      /* 配列todos[]に要素を追加する */
+      // todos[{ 新しいID, コメント, 作業状態 }]
+      // [push()] オブジェクトや配列に要素を追加するメソッド
+      this.todos.push({
+        id: this.uid++, // idをインクリメントで追加する
+        comment: comment.value, // コメントを入力値で追加する
+        state: 0 // 作業状態はデフォルト「作業中=0」で追加する
+      })
+      // フォーム要素を空にする
+      comment.value = ''
     }
   }
 }
