@@ -33,12 +33,18 @@
           <th>{{ item.id }}</th>
           <td>{{ item.comment }}</td>
           <td class="state">
-            <!-- 状態変更ボタンのモック -->
-            <button>{{ item.state }}</button>
+            <!-- 状態変更ボタンのモック（イベントハンドリング） -->
+            <!-- v-on:イベント名="メソッド名($event)" -->
+            <button v-on:click="doChangeState(item)">
+                {{ item.state }}
+            </button>
           </td>
           <td class="button">
-            <!-- 削除ボタンのモック -->
-            <button>削除</button>
+            <!-- 削除ボタンのモック（イベントハンドリング） -->
+            <!-- v-on:イベント名="メソッド名($event)" -->
+            <button v-on:click="doRemove(item)">
+                削除
+            </button>
           </td>
         </tr>
       </tbody>
