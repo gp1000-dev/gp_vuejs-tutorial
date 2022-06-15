@@ -125,6 +125,19 @@ export default {
       })
       // フォーム要素を空にする
       comment.value = ''
+    },
+    // ToDoListの状態変更の処理をするメソッド
+    doChangeState: function (item) {
+      // item.state の値を反転します
+      // [条件式 ? 真の処理 : 偽の処理] 三項演算子と呼ばれ、条件式に対して真偽値に応じて"?"以降の処理が実行されます
+      item.state = item.state ? 0 : 1
+    },
+    // ToDoListの削除の処理をするメソッド
+    doRemove: function (item) {
+      // [Array.prototype.indexOf()] 引数に与えられた内容と同じ内容を持つ最初の配列要素の添字を返します
+      const index = this.todos.indexOf(item)
+      // [splice(開始位置, 削除個数)] 配列の既存の要素を取り除いて配列の内容を変更します
+      this.todos.splice(index, 1)
     }
   }
 }
