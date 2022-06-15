@@ -50,7 +50,8 @@
             <!-- 状態変更ボタンのモック（イベントハンドリング） -->
             <!-- v-on:イベント名="メソッド名($event)" -->
             <button v-on:click="doChangeState(item)">
-                {{ item.state }}
+                <!-- 状態をラベル名で表示する -->
+                {{ labels[item.state] }}
             </button>
           </td>
           <td class="button">
@@ -113,6 +114,19 @@ export default {
   // 算出プロパティを定義する
   // [computed]Vueインスタンスの状態から，派生した値を計算してゲッターとして公開する
   computed: {
+    // 状態変更ボタンのラベルを数字から文字列に変換する算出プロパティを定義する
+    // キーから見つけやすいように、次のように加工したデータを作成しています
+    // {0: '作業中', 1: '完了', -1: 'すべて'}
+    labels () {
+      // [reduce()] 配列に対して関数を適用し、その処理によって配列の各値を(左から右に)一つの値にまとめます
+      // このコードでは重複した要素を取り除いています
+      // 「数値, 数値:'文字列'」を「数値:'文字列'」の形にデータを加工する
+      return this.options.reduce(function (a, b) {
+        // [Object.assign(target,sources)] オブジェクトをマージする(targetにsourcesをマージしてtargetに返す)
+        // 「数値, 数値:'文字列'」の形式にデータを加工する
+        return Object.assign(a, { [b.value]: b.label })
+      }, {})
+    },
     // 絞り込みフォームで指定した条件に応じて配列の要素を取り出す算出プロパティを定義する
     // [変数current] 絞り込みフォームで指定した条件の値
     // [el] v-for で取得するToDoリストのデータ
