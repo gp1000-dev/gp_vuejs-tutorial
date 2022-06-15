@@ -84,7 +84,16 @@ export default {
     return {
       // ToDo リストデータ用の空の配列を data オプションへ登録
       todos: [], // 配列todos[]を定義する
-      uid: 0 // 変数uidを定義する
+      uid: 0, // 変数uidを定義する
+      // 絞り込み機能の選択肢（配列options）を定義する
+      options: [
+        { value: -1, label: 'すべて' },
+        { value: 0, label: '作業中' },
+        { value: 1, label: '完了' }
+      ],
+      // 選択している options の value を記憶するための変数currentを定義する
+      // 初期値を「-1」つまり「すべて」に設定する
+      current: -1
     }
   },
   // ライフサイクルフックを定義する
