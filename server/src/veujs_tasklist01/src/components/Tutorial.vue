@@ -28,7 +28,8 @@
         <!-- リストレンダリング(反復表示) -->
         <!-- [v-for]配列やオブジェクトの中身を反復表示させるディレクティブ -->
         <!-- [v-bind:key] リストのアイテムを識別可能にする（keyにitem.idを指定） -->
-        <tr v-for="item in todos" v-bind:key="item.id">
+        <!-- [computedTodos] 算出プロパティを指定して、Vueインスタンスの状態から派生した値を計算して反映できるようにする -->
+        <tr v-for="item in computedTodos" v-bind:key="item.id">
           <!-- 要素の情報 -->
           <th>{{ item.id }}</th>
           <td>{{ item.comment }}</td>
